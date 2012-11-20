@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Galerie Photo</title>
+        <meta charset="UTF-8">
+        <script src="js/modernizr.js"></script>
+        <link rel="stylesheet" href="css/galerie.css">
+    </head>
+    <body>
+        <div id="conteneur">
+            <header>
+                <h1>Mon Album victor</h1>
+                <p>Lorem ipsum...</p>
+                <time datetime="2012-10-24">24 octobre 2012</time>
+            </header>
+            <div id="corps">
+                <section id="grand_format">
+                    <figure>
+                        <img id="imgGrand" src="images/Chrysanthemum.jpg" alt="Chrysanthemum">
+                        <figcaption id="legende">Chrysanthemum</figcaption>
+                    </figure>
+                    <div id="precedent">&lt;</div>
+                    <div id="suivant">&gt;</div>
+                </section>
+                <section id="vignettes">
+                    <figure>
+                        <img src="images/Chrysanthemum.jpg" alt="Chrysanthemum">
+                        <figcaption>Chrysanthemum</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/Desert.jpg" alt="Desert">
+                        <figcaption>Desert</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/Hydrangeas.jpg" alt="Hydrangeas">
+                        <figcaption>Hydrangeas</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/Jellyfish.jpg" alt="Jellyfish">
+                        <figcaption>Jellyfish</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/Koala.jpg" alt="Koala">
+                        <figcaption>Koala</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/Lighthouse.jpg" alt="Lighthouse">
+                        <figcaption>Lighthouse</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/Penguins.jpg" alt="Penguins">
+                        <figcaption>Penguins</figcaption>
+                    </figure>
+                    <figure>
+                        <img id="derVignette" src="images/Tulips.jpg" alt="Tulips">
+                        <figcaption>Tulips</figcaption>
+                    </figure>
+                </section>
+            </div>
+        </div>
+        <script>
+            /*
+             * En javascript, afficher non pas la première, mais la
+             * dernière image et sa légende en grand format
+             * (version difficile : sans modifier le HTML)
+             * (version simple : en créant des attributs id dans le HTML)
+             */
+            
+            var cheminImg = document.getElementById("derVignette").src;
+            var legendeImg = document.getElementById("derVignette").alt;
+            
+            document.getElementById("imgGrand").src = cheminImg;
+            document.getElementById("legende").innerHTML = legendeImg;
+            
+            var imgList = document.getElementsByTagName("img");
+            var derImg = imgList[imgList.length - 1];
+            
+            var cheminImg2 = derImg.src;
+            var legendeImg2 = derImg.alt;
+            
+            var sectionGrandFormat = document.getElementById("grand_format");
+            sectionGrandFormat.childNodes[1].childNodes[1].src = cheminImg2;
+            sectionGrandFormat.childNodes[1].childNodes[3].innerHTML = legendeImg2;
+            
+            /*
+             * Sur le clic de la première vignette, afficher celle-ci et sa légende
+             * en grand format
+             */
+            
+            // Un tableau qui contient toutes les balises <figure> descendants de #vignettes
+            var vignettes = document.getElementById("vignettes").getElementsByTagName("img");
+            
+            for(var i=0; i<vignettes.length; i++)
+            {
+                vignettes[i].onclick = function() {
+                    // this : mot clé réservé, qui désigne le déclencheur de l'évenement (ici img)
+                    var cheminImg = this.src;
+                    var legendeImg = this.alt;
+
+                    document.getElementById("imgGrand").src = cheminImg;
+                    document.getElementById("legende").innerHTML = legendeImg;
+                }
+            }
+        </script>
+    </body>
+</html>
